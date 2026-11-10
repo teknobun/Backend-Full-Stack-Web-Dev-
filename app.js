@@ -2,10 +2,10 @@ const express = require('express');
 const morgan = require('morgan'); // Task 4.3: Import morgan
 const app = express();
 
-// 4.1: JSON parsing middleware
+//JSON parsing middleware
 app.use(express.json());
 
-// 4.3: Morgan request logging middleware ("dev" format)
+//Morgan request logging middleware 
 app.use(morgan("dev"));
 
 let movies = [
@@ -59,7 +59,6 @@ function validateMovie(body, partial = false) {
   return errors;
 }
 
-// --- VALID ROUTES ---
 
 // GET all movies (with optional filtering and sorting)
 app.get('/movies', (req, res) => {
