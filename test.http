@@ -1,0 +1,70 @@
+### Get all movies (Expected: 200 OK)
+GET http://localhost:3000/movies
+
+### Get one existing movie (Expected: 200 OK)
+GET http://localhost:3000/movies/1
+
+### Get a missing movie (Expected: 404 Not Found)
+GET http://localhost:3000/movies/999
+
+### Create a valid movie (Expected: 201 Created)
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "Arrival",
+  "director": "Denis Villeneuve",
+  "year": 2016,
+  "genre": "Sci-Fi"
+}
+
+### Create an invalid movie (Expected: 400 Bad Request)
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "",
+  "year": "not a number"
+}
+
+### Replace a movie with PUT (Expected: 200 OK)
+PUT http://localhost:3000/movies/1
+Content-Type: application/json
+
+{
+  "title": "The Matrix",
+  "director": "The Wachowskis",
+  "year": 1999,
+  "genre": "Sci-Fi"
+}
+
+### PUT with a missing property (Expected: 400 Bad Request)
+PUT http://localhost:3000/movies/1
+Content-Type: application/json
+
+{
+  "title": "The Matrix"
+}
+
+### Partially update a movie (Expected: 200 OK)
+PATCH http://localhost:3000/movies/1
+Content-Type: application/json
+
+{
+  "year": 2000
+}
+
+### Filter and sort movies (Expected: 200 OK)
+GET http://localhost:3000/movies?genre=Sci-Fi&minYear=2000&sort=year
+
+### Use an invalid minYear (Expected: 400 Bad Request)
+GET http://localhost:3000/movies?minYear=invalid
+
+### Delete an existing movie (Expected: 204 No Content)
+DELETE http://localhost:3000/movies/1
+
+### Delete the same movie again (Expected: 404 Not Found)
+DELETE http://localhost:3000/movies/1
+
+### Request an unknown route (Expected: 404 Route Not Found)
+GET http://localhost:3000/does-not-exist
